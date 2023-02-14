@@ -43,21 +43,23 @@ def do_dialog():
     url = "http://www.cbr.ru/scripts/XML_daily.asp"
     response = requests.get(url)
     data = xmltodict.parse(response.content)
-    print(data)
-    # return name
+    # print(data)
+    return url
 
-
-
-
-
-
-
-
+def array_1():
+    my_array = []
+    for item in data['ValCurs']['Valute']:
+        my_set = [item['CharCode'], item['Name'], item['Value']];
+        my_array.append(my_set)
+        output_text.insert(tk.END, my_set +os.linesep)
+        # print(my_set)
+        
     
 # Обработчик нажатия кнопки
 def process_button():
     file_name = do_dialog()
-    #label_01['text'] = file_name
+    label_01['text'] = file_name
+    array_1() 
    # df = pandas_read_csv(file_name)
    # check_all_columns(df)  
     mb.showinfo(title=None, message="Готово")
