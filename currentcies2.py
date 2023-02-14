@@ -44,22 +44,30 @@ def do_dialog():
     response = requests.get(url)
     data = xmltodict.parse(response.content)
     # print(data)
-    return url
-
-def array_1():
+    # return url
+#def array_1(data):
     my_array = []
+    i = 1
+    output_text.insert(tk.END, "            Привет, Шуричек")
     for item in data['ValCurs']['Valute']:
         my_set = [item['CharCode'], item['Name'], item['Value']];
-        my_array.append(my_set)
-        output_text.insert(tk.END, my_set +os.linesep)
-        # print(my_set)
+        my_array.append(my_set) 
+        output_text.insert(tk.END, my_set)          
+        i = i +1 
+        output_text.insert(tk.END, i)   
+    label_11['text'] =str(i)
+    return url
+# output_text.insert(my_set)
+# print(my_set)
         
     
 # Обработчик нажатия кнопки
 def process_button():
+    output_text.insert(tk.END, "Привет, Шурик")
     file_name = do_dialog()
     label_01['text'] = file_name
-    array_1() 
+    # label_11['text'] =str(i)
+    #array_1(data) 
    # df = pandas_read_csv(file_name)
    # check_all_columns(df)  
     mb.showinfo(title=None, message="Готово")
