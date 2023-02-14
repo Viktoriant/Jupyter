@@ -6,12 +6,13 @@ from tkinter import messagebox as mb
 from tkinter import filedialog as fd
 import os
 import pandas as pd 
-
+import requests
+import xmltodict
 
 # Создание главного окна
 window = tk.Tk()                      # переменной окна window 
-window.geometry("550x550")
-window.title("Программа анализа .csv файлов")
+window.geometry("700x700")
+window.title("Программа анализа XML файлов")
 
 # Создание меток вывода
 label_00 = tk.Label(text = "Файл:")
@@ -33,9 +34,17 @@ label_21 = tk.Label(text = "")
 label_21.grid(row=2, column=1, sticky="w")
 
 # Создание текстового вывода с прокруткой
-output_text = st(height = 22, width = 50)
-output_text.grid(row=3, column=1, padx=10, pady=10, sticky='w')
+output_text = st(height = 30, width = 60)
+output_text.grid(row=3, column=1, padx=5, pady=10, sticky='w')
 
+
+# Диалог открытия файла
+def do_dialog():
+    url = "http://www.cbr.ru/scripts/XML_daily.asp"
+    response = requests.get(url)
+    data = xmltodict.parse(response.content)
+    print(data)
+    # return name
 
 
 
@@ -48,9 +57,9 @@ output_text.grid(row=3, column=1, padx=10, pady=10, sticky='w')
 # Обработчик нажатия кнопки
 def process_button():
     file_name = do_dialog()
-    label_01['text'] = file_name
-    df = pandas_read_csv(file_name)
-    check_all_columns(df)  
+    #label_01['text'] = file_name
+   # df = pandas_read_csv(file_name)
+   # check_all_columns(df)  
     mb.showinfo(title=None, message="Готово")
     
 # Создание кнопки
