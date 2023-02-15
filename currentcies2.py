@@ -48,7 +48,7 @@ def do_dialog():
 #def array_1(data):
     my_array = []
     i = 1
-    output_text.insert(tk.END, "            Привет, Шуричек")
+    output_text.insert(tk.END, "            Привет ")
     for item in data['ValCurs']['Valute']:
         my_set = [item['CharCode'], item['Name'], item['Value']];
         my_array.append(my_set) 
@@ -63,7 +63,7 @@ def do_dialog():
     
 # Обработчик нажатия кнопки
 def process_button():
-    output_text.insert(tk.END, "Привет, Шурик")
+    output_text.insert(tk.END, "Привет  из кнопки")
     file_name = do_dialog()
     label_01['text'] = file_name
     # label_11['text'] =str(i)
