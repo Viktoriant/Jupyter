@@ -43,39 +43,32 @@ def do_dialog():
     url = "http://www.cbr.ru/scripts/XML_daily.asp"
     response = requests.get(url)
     data = xmltodict.parse(response.content)
-    # print(data)
-    # return url
-#def array_1(data):
+  
     my_array = []
     i = 1
-    output_text.insert(tk.END, "            Привет ")
-    for item in data['ValCurs']['Valute']:
-        my_set = [item['CharCode'], item['Name'], item['Value']];
-        my_array.append(my_set) 
-        output_text.insert(tk.END, my_set)          
-        i = i +1 
-        output_text.insert(tk.END, i)   
+    
+    for item in data['ValCurs']['Valute']:        
+        my_set = [item['CharCode'], item['Name'], item['Value'],'\n'];
+        my_array.append(my_set)         
+        l = len(my_set[1])
+        n = 45 - l
+        l2 =" " * n
+        output_text.insert(tk.END,  my_set[0] + ' ' +  my_set[1] + l2 +  my_set[2] + '\n')         
+        i = i +1           
     label_11['text'] =str(i)
     return url
-# output_text.insert(my_set)
-# print(my_set)
-        
     
 # Обработчик нажатия кнопки
-def process_button():
-    output_text.insert(tk.END, "Привет  из кнопки")
+def process_button():   
     file_name = do_dialog()
     label_01['text'] = file_name
-    # label_11['text'] =str(i)
-    #array_1(data) 
-   # df = pandas_read_csv(file_name)
-   # check_all_columns(df)  
+    label_21['text'] = 3
+   
     mb.showinfo(title=None, message="Готово")
     
 # Создание кнопки
 button = tk.Button(window, text="Прочитать файл", command=process_button)
 button.grid(row=4,column=1)
-
 
 #Запуск цикла mainloop
 window.mainloop()
